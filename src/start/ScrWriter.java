@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +24,7 @@ class ScrWriter {
 	}
 	
 	
-	void writeUpdate(){
+	void writeUpdate() throws IOException{
 		Date curTime = new Date();
 		
 		DumperOptions options = new DumperOptions();
