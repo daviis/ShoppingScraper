@@ -1,6 +1,6 @@
 package start;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 
@@ -8,14 +8,14 @@ import email.Email;
 import search.*;
 
 public class Start {
-	static Date lastSearch = new Date();
+	private int MAX_PAGE_LENGTH = 5;
 	
 	public Start() throws ParseException{
 		Reader read = new Reader();
 		try{
 			ArrayList<SearchInfo> si = read.getSearchInfo();
 			for(SearchInfo info : si){
-				Search oneSearch = new Search(info);
+				Search oneSearch = new Search(info, MAX_PAGE_LENGTH);
 				ArrayList<Post> links = oneSearch.findLinks();
 				
 				Email mail = new Email(info.getSearchTitle(), info.getReciever(), links);
@@ -27,7 +27,7 @@ public class Start {
 			wr.writeUpdate();
 			
 		}
-		catch (UnsupportedEncodingException ex){
+		catch (IOException ex){
 			Email errormail = new Email("Craigslist scraper broke", "isaacthrow99@gmail.com", ex.getMessage());
 			errormail.errorSend();
 		}

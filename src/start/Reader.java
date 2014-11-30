@@ -47,7 +47,9 @@ public class Reader {
 						(String)objectMap.get("searchTitle"), 
 						(String)objectMap.get("reciever"), 
 						(String)objectMap.get("items"), 
-						date);
+						date,
+						objectMap.get("minPrice").toString(), 
+						objectMap.get("maxPrice").toString());
 				infoList.add(si);
 			}
 		}

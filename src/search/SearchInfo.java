@@ -1,9 +1,8 @@
 package search;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.nio.charset.UnsupportedCharsetException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +15,8 @@ public class SearchInfo {
 	private String reciever;
 	private String items;
 	private Date lastSearch;
+	private String minPrice;
+	private String maxPrice;
 
 	
 	/*
@@ -33,7 +34,7 @@ public class SearchInfo {
 		this.reciever = rev;
 	}
 	
-	public void setItems(String str) throws UnsupportedEncodingException {
+	public void setItems(String str) throws IOException {
 		//need to url encode this for jsoup
 		this.items = URLEncoder.encode(str, "UTF-8");
 	}
@@ -45,6 +46,14 @@ public class SearchInfo {
 	public void setSearchCity(String city){
 		this.searchCity = city;
 		this.searchUrl = "http://" + city + ".craigslist.org/";
+	}
+	
+	public void setMinPrice(String min){
+		this.minPrice = min;
+	}
+	
+	public void setMaxPrice(String max){
+		this.maxPrice = max;
 	}
 	
 	/*
@@ -73,30 +82,36 @@ public class SearchInfo {
 	public String getSearchCity(){
 		return searchCity;
 	}
+	
+	public String getMinPrice(){
+		return this.minPrice;
+	}
+	
+	public String getMaxPrice(){
+		return this.maxPrice;
+	}
 
 	//ctor
-	public SearchInfo(String city, String title, String rec, String it, Date lastSearched) throws UnsupportedEncodingException{
+	public SearchInfo(String city, String title, String rec, String it, Date lastSearched, String min, String max) throws IOException{
 		this.searchTitle = title;
 		this.reciever = rec;
 		this.lastSearch = lastSearched;
 		this.setSearchCity(city);
-		setItems(it);
+		this.setItems(it);
+		this.setMinPrice(min);
+		this.setMaxPrice(max);
 	}
 	
-	public Map<String, Object> dumpMap(){
+	public Map<String, Object> dumpMap() throws IOException{
 		HashMap<String, Object> retMap = new HashMap<String, Object>();
 		
 		retMap.put("lastSearch", getLastSearch());
 		retMap.put("searchTitle", getSearchTitle());
 		retMap.put("searchCity", getSearchCity());
 		retMap.put("reciever", getReciever());
-		
-		try{
-			retMap.put("items", URLDecoder.decode(getItems(), "UTF-8"));
-		}
-		catch(UnsupportedEncodingException ex){
-			ex.printStackTrace();
-		}
+		retMap.put("items", URLDecoder.decode(getItems(), "UTF-8"));
+		retMap.put("minPrice", getMinPrice());
+		retMap.put("maxPrice", getMaxPrice());
 		
 		return retMap;
 	}
