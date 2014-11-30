@@ -1,7 +1,10 @@
 package search;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,13 +34,16 @@ public class Search {
 			// get all rows
 			Elements rows = doc.select("p[class*=row]");
 			//all rows
-			Integer counter = 0;
 			for (Element row : rows) {
 				Elements title = row.select("span[class*=pl]").select("a");
 				Elements price = row.select("span[class*=l2]").select("span[class*=price]");
-				Post pst = new Post(info.getSearchUrl()+title.attr("href"), title.text(), price.text());
-				counter++;
-				links.add(pst);
+				String dateTime = row.select("time").attr("datetime");
+				if (includePost(dateTime, this.info.getLastSearch())){
+					Post pst = new Post(info.getSearchUrl()+title.attr("href"), title.text(), price.text());
+					links.add(pst);}
+				else{
+					break;
+				}
 				
 			}
 	 
@@ -48,5 +54,17 @@ public class Search {
 			lnk.sysPrint();
 		}
 		return links;
+	}
+	
+	private boolean includePost(String postTime, Date lastSearch){
+		try {
+			Date postTimeDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(postTime);
+
+			return lastSearch.before(postTimeDate);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return true;
+		}
 	}
 }

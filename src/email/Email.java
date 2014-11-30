@@ -14,7 +14,7 @@ public class Email {
 	private String msgRecever;
 	private String errorMsg;
 	
-	//email if shit broke
+	//email if it broke
 	public Email(String title, String rec, String error){
 		msgTitle = title;
 		msgRecever = rec;
@@ -54,7 +54,7 @@ public class Email {
 		this.session = Session.getDefaultInstance(props,
 			new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("isaacspl","Gatekeeper");
+					return new PasswordAuthentication("isaacthrow99","justathrow");
 				}
 			});
  
@@ -67,7 +67,7 @@ public class Email {
 			Message message = new MimeMessage(this.session);
 			message.setFrom(new InternetAddress(msgRecever));
 			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("isaacspl@gmail.com"));
+					InternetAddress.parse("isaacthrow99@gmail.com"));
 			message.setSubject(msgTitle);
 			String text = "";
 			for(Post link : posts){
