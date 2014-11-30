@@ -15,12 +15,12 @@ public class Start {
 		try{
 			ArrayList<SearchInfo> si = read.getSearchInfo();
 			for(SearchInfo info : si){
-//				Search oneSearch = new Search(info);
-//				ArrayList<Post> links = oneSearch.findLinks();
-//				
-//				Email mail = new Email(info.getSearchTitle(), info.getRecever(), links);
-//				mail.send();
-				//mail.sysPrint();
+				Search oneSearch = new Search(info);
+				ArrayList<Post> links = oneSearch.findLinks();
+				
+				Email mail = new Email(info.getSearchTitle(), info.getReciever(), links);
+				mail.send();
+				mail.sysPrint();
 				
 			}
 			ScrWriter wr = new ScrWriter(si);
