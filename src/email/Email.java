@@ -70,7 +70,7 @@ public class Email {
 					InternetAddress.parse(msgRecever));
 			message.setSubject(msgTitle);
 			
-			StringBuilder text = new StringBuilder("Number of results: " + posts.size());
+			StringBuilder text = new StringBuilder("Number of results: " + posts.size() + "\n");
 			for(Post link : posts){
 				text.append(link.toString() +"\n\n");
 			}
