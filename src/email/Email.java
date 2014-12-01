@@ -30,7 +30,7 @@ public class Email {
 		this.session = Session.getDefaultInstance(props,
 			new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("isaacspl","Gatekeeper");
+					return new PasswordAuthentication("isaacthrow99","justathrow");
 					}
 				}
 		);
@@ -65,15 +65,17 @@ public class Email {
 		try {
 			 
 			Message message = new MimeMessage(this.session);
-			message.setFrom(new InternetAddress(msgRecever));
+			message.setFrom(new InternetAddress("isaacthrow99"));
 			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("isaacthrow99@gmail.com"));
+					InternetAddress.parse(msgRecever));
 			message.setSubject(msgTitle);
-			String text = "";
+			
+			StringBuilder text = new StringBuilder("Number of results: " + posts.size());
 			for(Post link : posts){
-				text += link.toString() +"\n\n";
+				text.append(link.toString() +"\n\n");
 			}
-			message.setText(text);
+			
+			message.setText(text.toString());
  
 			Transport.send(message);
  
