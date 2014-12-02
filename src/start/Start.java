@@ -9,7 +9,7 @@ import search.*;
 
 public class Start {
 	private final int MAX_PAGE_LENGTH = 5;
-	private final boolean DONT_SEND_WHEN_EMPTY = true;
+	private final boolean DONT_SEND_WHEN_EMPTY = false;
 	
 	public Start() throws ParseException{
 		Reader read = new Reader();
@@ -22,7 +22,6 @@ public class Start {
 				if(links.size()!=0 || DONT_SEND_WHEN_EMPTY){
 					Email mail = new Email(info.getSearchTitle(), info.getReciever(), links);
 					mail.send();
-					mail.sysPrint();
 				}
 				
 			}

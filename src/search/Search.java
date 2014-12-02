@@ -40,7 +40,6 @@ public class Search {
 				else{
 					url.append("&maxAsk=" + info.getMaxPrice());
 				}
-				System.out.println(url);
 				doc = Jsoup.connect(url.toString()).get();
 		 
 				// get page title
