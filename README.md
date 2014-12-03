@@ -11,7 +11,7 @@ This project utilises the following external libraries
 
 ###Input yaml file
 
-Every entry starts with a left alligned number followed by a colon. The actual number isn't important but there does need to be one. Then there needs to be all of these camalcase phrases: searchCity, reciever, items, maxPrice, lastSearch, minPrice and searchTitle.
+Every entry starts with a left alligned number followed by a colon. The actual number isn't important but there does need to be one and it needs to be unique. Then there needs to be all of these camalcase phrases: searchCity, reciever, items, maxPrice, lastSearch, minPrice and searchTitle.
 
 The acceptable data for the entries are listed below
 * searchCity : any city that there is a CraigsList for. To find these you can go to craigslist.org and they appear on the left hand side.
